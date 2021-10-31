@@ -20,6 +20,15 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   List<ChatMessage> _messages = [];
 
   @override
+  void dispose() {
+    // TODO: cancelar la escucha del socket
+    for(ChatMessage message in _messages){
+      message.animationCtrl.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
@@ -123,7 +132,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   _handleSubmit(String texto){
     if(texto.length == 0) return;
 
-    
+
     print(texto);
     _chatTextCtrl.clear();
     _focusNode.requestFocus();
