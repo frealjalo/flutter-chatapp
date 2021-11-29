@@ -14,14 +14,14 @@ class _UsuariosPageState extends State<UsuariosPage> {
       RefreshController(initialRefresh: false);
 
   final usuarios = [
-    Usuario(email: 'test1@test.com', nombre: 'Maria', uid: '1', onLine: true),
-    Usuario(email: 'test2@test.com', nombre: 'Sergio', uid: '2'),
-    Usuario(email: 'test3@test.com', nombre: 'Arturo', uid: '3', onLine: true),
-    Usuario(email: 'test4@test.com', nombre: 'Freddy', uid: '4', onLine: true),
-    Usuario(email: 'test5@test.com', nombre: 'Claudia', uid: '5'),
-    Usuario(email: 'test6@test.com', nombre: 'Julieta', uid: '6'),
-    Usuario(email: 'test7@test.com', nombre: 'Natali', uid: '7', onLine: true),
-    Usuario(email: 'test8@test.com', nombre: 'Nasly', uid: '8', onLine: true),
+    Usuario(email: 'test1@test.com', nombre: 'Maria', uId: '1', online: true),
+    Usuario(email: 'test2@test.com', nombre: 'Sergio', uId: '2'),
+    Usuario(email: 'test3@test.com', nombre: 'Arturo', uId: '3', online: true),
+    Usuario(email: 'test4@test.com', nombre: 'Freddy', uId: '4', online: true),
+    Usuario(email: 'test5@test.com', nombre: 'Claudia', uId: '5'),
+    Usuario(email: 'test6@test.com', nombre: 'Julieta', uId: '6'),
+    Usuario(email: 'test7@test.com', nombre: 'Natali', uId: '7', online: true),
+    Usuario(email: 'test8@test.com', nombre: 'Nasly', uId: '8', online: true),
   ];
 
   @override
@@ -77,7 +77,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
         width: 10,
         height: 10,
         decoration: BoxDecoration(
-          color: usuario.onLine ? Colors.greenAccent : Colors.redAccent,
+          color: usuario.online ? Colors.greenAccent : Colors.redAccent,
           borderRadius: BorderRadius.circular(10)
         ),
       ),
