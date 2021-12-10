@@ -1,3 +1,4 @@
+import 'package:chatapp/helpers/mostrar_alerta.dart';
 import 'package:chatapp/services/auth_service.dart';
 import 'package:chatapp/widgets/boton_azul_widget.dart';
 import 'package:chatapp/widgets/custom_input_widget.dart';
@@ -46,6 +47,9 @@ class _FormState extends State<_Form> {
   final passCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    
+    final authService = Provider.of<AuthService>(context, listen: false);
+    final provider = Provider.of<AuthService>(context);
     return Container(
       margin: EdgeInsets.only(top: 50),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -54,13 +58,18 @@ class _FormState extends State<_Form> {
           CustomInput(tipo: TextInputType.emailAddress, icon: Icons.email_outlined, hintText: 'Email', controller: emailCtrl),
           CustomInput(obscureText: true, icon: Icons.lock, hintText: 'Password', controller: passCtrl),
 
-          BotonAzul(texto: 'Ingresar', 
-          onPressed: (){
-            print(emailCtrl.text);
-            print(passCtrl.text);
-            final authService = Provider.of<AuthService>(context, listen: false);
-            authService.login(emailCtrl.text, passCtrl.text);
-          })
+          BotonAzul(
+            texto: 'Ingresar', 
+            onPressed: (!provider.autenticando) ? () async {
+              FocusScope.of(context).unfocus();
+              final loginOk = await authService.login(emailCtrl.text.trim(), passCtrl.text.trim());
+              if(loginOk){
+                Navigator.pushReplacementNamed(context, 'usuarios');
+              } else {
+                mostrarAlerta(context, 'Credenciales incorrectas', 'Usuario y contraseña incorrectos');
+              }
+            } : () => Null
+          ),
         ],
       ),
     );
